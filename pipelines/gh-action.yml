@@ -1,0 +1,12 @@
+
+### Note: @devops-templates is reference of template repo pipelines
+name: Node.js CI
+
+on:
+  push:
+    branches:
+    - master
+jobs:
+  - uses: ci-pipelines/backend-ci.yaml@devops-templates
+  - uses: cd-pipelines/dev-release-staging.yaml@devops-templates
+  - uses: cd-pipelines/prod-deployment.yaml@devops-templates
