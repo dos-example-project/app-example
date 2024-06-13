@@ -1,4 +1,5 @@
 
+### This is main pipeline - call 
 ### Note: @devops-templates is reference of template repo pipelines
 name: Node.js CI
 
@@ -7,6 +8,29 @@ on:
     branches:
     - master
 jobs:
+  ### Generate new release version. 
+  - uses: helpers/gitVersion.yaml@devops-templates
+    outputs:
+      releaseVersion: $OUTPUT_RELEASE_VERSION
+      ...
+
+  ### Build And Testing Application. 
   - uses: ci-pipelines/backend-ci.yaml@devops-templates
+    inputs:
+      service-name: "app-example"
+      ...
+
+  ### Deploy Built Version to Dev - Release new artifact version - Deploy new released to STAGING.
+  ### This stage include LoadTest job inside, after deployed application on STAGING env. 
   - uses: cd-pipelines/dev-release-staging.yaml@devops-templates
+    inputs:
+      service-name: "app-example"
+      releaseVersion: $OUTPUT_RELEASE_VERSION
+      ... 
+
+  ### Deploy new released version to Production.
   - uses: cd-pipelines/prod-deployment.yaml@devops-templates
+    inputs:
+      service-name: "app-example"
+      releaseVersion: $OUTPUT_RELEASE_VERSION
+      ...
