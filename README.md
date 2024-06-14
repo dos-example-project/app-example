@@ -30,10 +30,10 @@
 
 #### 2. Zero downtime deployment
 - Requier: application need to include health-check endpoint
-- Add livenessProbe and readnessProbe in [deployment template](https://github.com/dos-example-project/app-example/tree/main/helms/templates)
+- Add livenessProbe and readnessProbe in [deployment template](https://github.com/dos-example-project/app-example/tree/main/helms/templates/deployment.yaml)
 ![alt text](docs/images/liveness-readness.png)
 
-- Add rolling update Strategy in [deployment template](https://github.com/dos-example-project/app-example/tree/main/helms/templates)
+- Add rolling update Strategy in [deployment template](https://github.com/dos-example-project/app-example/tree/main/helms/templates/deployment.yaml)
 ![alt text](docs/images/strategy.png)
 
 
